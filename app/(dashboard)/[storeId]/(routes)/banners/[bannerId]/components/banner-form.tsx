@@ -25,6 +25,7 @@ import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { ApiAlert } from "@/components/ui/api-alert";
 import UseOrigin from "@/hooks/use-origin";
+import ImageUpload from "@/components/ui/image-upload";
 
 interface BannerFormProps {
   initialData: Banner | null;
@@ -44,10 +45,12 @@ const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const title = initialData ? "Edit Banner" : "Buat Banner"
-  const description = initialData ? "Edit Banner Toko" : "Buat Banner Toko"
-  const toastMessage = initialData ? "Banner Berhasil di edit" : "Banner berhasil di buat"
-  const action = initialData ? "Simpan Banner" : "Buat Banner"
+  const title = initialData ? "Edit Banner" : "Buat Banner";
+  const description = initialData ? "Edit Banner Toko" : "Buat Banner Toko";
+  const toastMessage = initialData
+    ? "Banner Berhasil di edit"
+    : "Banner berhasil di buat";
+  const action = initialData ? "Simpan Banner" : "Buat Banner";
 
   const form = useForm<BannerFormValues>({
     resolver: zodResolver(formSchema),
@@ -96,14 +99,14 @@ const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {initialData && (
-        <Button
-          disabled={loading}
-          variant="destructive"
-          size="sm"
-          onClick={() => setOpen(true)}
-        >
-          <Trash className="h-4 w-4" />
-        </Button>
+          <Button
+            disabled={loading}
+            variant="destructive"
+            size="sm"
+            onClick={() => setOpen(true)}
+          >
+            <Trash className="h-4 w-4" />
+          </Button>
         )}
       </div>
       <Separator />
@@ -124,6 +127,24 @@ const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
                       placeholder="Label Banner"
                       disabled={loading}
                       {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image</FormLabel>
+                  <FormControl>
+                    <ImageUpload
+                      disable={loading}
+                      onChange={(url) => field.onChange(url)}
+                      onRemove={() => field.onChange("")}
+                      value={field.value ? [field.value] : []}
                     />
                   </FormControl>
                   <FormMessage />
