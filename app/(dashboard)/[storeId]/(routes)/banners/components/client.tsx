@@ -6,9 +6,11 @@ import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { BannerColumn, columns } from "./column";
+import { DataTable } from "@/components/ui/data-table";
 
 interface BannerClientProps {
-  data: Banner[]
+  data: BannerColumn[]
 }
 
 const BannerClient: React.FC<BannerClientProps> = ({
@@ -27,6 +29,7 @@ const BannerClient: React.FC<BannerClientProps> = ({
         </Button>
       </div>
       <Separator />
+      <DataTable data={data} columns={columns} searchKey="label" />
     </>
   );
 };
