@@ -63,9 +63,19 @@ const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
   const onSubmit = async (data: BannerFormValues) => {
     try {
       setLoading(true);
-      await axios.patch(`/api/stores/${params.storeId}`, data);
+
+      if (initialData) {
+        await axios.patch(
+          `/api/${params.storeId}/banners/${params.bannerId}`,
+          data
+        );
+      } else {
+        await axios.post(`/api/${params.storeId}/banners`, data);
+      }
+
       router.refresh();
-      toast.success("Toko berhasi di update");
+      router.push(`/${params.storeId}/banners`);
+      toast.success(toastMessage);
     } catch (error) {
       toast.error("Cek kembali data yang di input");
     } finally {
@@ -76,10 +86,10 @@ const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}`);
+      await axios.delete(`/api/${params.storeId}/banners/${params.bannerId}`);
       router.refresh();
       router.push("/");
-      toast.success("Toko Berhasil Di Hapus");
+      toast.success("Banner Berhasil Di Hapus");
     } catch (error) {
       toast.error("Cek Kembali data dan koneksi mu");
     } finally {
