@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { BannerColumn } from "./column";
+import { ProductColumn } from "./column";
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ import { useState } from "react";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-  data: BannerColumn;
+  data: ProductColumn;
 }
 
 const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -23,16 +23,16 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
     
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success("Id berhasil di copy")
+        toast.success("Product Id berhasil di copy")
     }
 
     const onDelete = async () => {
         try {
           setLoading(true);
-          await axios.delete(`/api/${params.storeId}/banners/${data.id}`);
+          await axios.delete(`/api/${params.storeId}/products/${data.id}`);
           router.refresh();
-          router.push(`/${params.storeId}/banners`);
-          toast.success("Banner Berhasil Di Hapus");
+          router.push(`/${params.storeId}/products`);
+          toast.success("Product Berhasil Di Hapus");
         } catch (error) {
           toast.error("Cek Kembali data dan koneksi mu");
         } finally {
@@ -62,7 +62,7 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
                 <Copy className="w-4 h-4 mr-2" />
                 Copy Id
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/banners/${data.id}`)}>
+            <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/products/${data.id}`)}>
                 <Edit className="w-4 h-4 mr-2" />
                 Update
             </DropdownMenuItem>

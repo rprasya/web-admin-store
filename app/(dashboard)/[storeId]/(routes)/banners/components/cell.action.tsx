@@ -23,7 +23,7 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
     
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success("Id berhasil di copy")
+        toast.success("Banner Id berhasil di copy")
     }
 
     const onDelete = async () => {
