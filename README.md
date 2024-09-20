@@ -29,6 +29,6 @@ Here is the website display :
 9. Manage Account
 ![Screenshot 2024-09-20 132053](https://github.com/user-attachments/assets/a85287a5-5ba2-4b9e-9b48-324993d48b31)
 
-If you want to explore the website further, visit this link https://vercel.com/rprasyas-projects/web-admin-store/B5J54Qfeh22LuXQLmNqW9iELU5KB
+If you want to explore the website further, visit this link https://web-admin-store.vercel.app/
 
 ©️ rprasya 2024
