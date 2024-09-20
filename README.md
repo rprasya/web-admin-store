@@ -1,4 +1,4 @@
-## Website Store
+## Website Admin Store
 
 Here is the website display :
 
