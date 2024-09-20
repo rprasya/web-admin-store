@@ -27,8 +27,8 @@ export default async function DashboardLayout({
 
   return (
     <>
-    <Navbar />
-      {children}
+      <Navbar />
+      <div className="ml-3 mt-3">{children}</div>
     </>
   );
 }
